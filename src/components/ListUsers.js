@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { act_get_user } from '../redux/actions';
+import { act_delete_user, act_get_user } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,6 +17,15 @@ export default function ListUsers() {
         // Thực hiện khi component mount
         dispatch(act_get_user());
     }, []);
+    const handleUpdate = (userUpdate) => {
+        // Lưu dữ liệu vào localStorage
+        localStorage.setItem("userUpdate", JSON.stringify(userUpdate));
+        // Chuyển sang UpdateUser Component
+        navigate("/updateUser")
+    }
+    const handleDelete = (id) => {
+        dispatch(act_delete_user(id));
+    }
     // Lấy state từ store và hiển thị lên component
     const listUser = useSelector(state => state.users);
     let elementListUser = listUser.map((user, index) => {
@@ -27,8 +36,8 @@ export default function ListUsers() {
             <td>{user.password}</td>
             <td>{user.fullname}</td>
             <td>
-                <button>Update</button>
-                <button>Delete</button>
+                <button onClick={() => handleUpdate(user)}>Update</button>
+                <button onClick={() => handleDelete(user.id)}>Delete</button>
             </td>
         </tr>
     })

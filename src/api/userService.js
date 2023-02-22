@@ -9,3 +9,9 @@ export const USER_GET_SERVICE = async () => {
 export const USER_POST_SERVICE = async (newUser) => {
     await instances.post("users", newUser);
 }
+export const USER_PATCH_SERVICE = async (updateUser) => {
+    await instances.patch("users/" + updateUser.id, updateUser);
+}
+export const USER_DELETE_SERVICE = async (id) => {
+    await instances.delete("users/" + id);
+}

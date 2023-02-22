@@ -23,3 +23,21 @@ export const USER_SAGA_POST = function* (action) {
         console.log("error==>", error);
     }
 }
+export const USER_SAGA_PATCH = function* (action) {
+    try {
+        yield call(userServices.USER_PATCH_SERVICE, action.payload);
+        // Cập nhật thành công
+        yield USER_SAGA_GET();
+    } catch (error) {
+        console.log("error===>", error);
+    }
+}
+export const USER_SAGA_DELETE = function* (action) {
+    try {
+        yield call(userServices.USER_DELETE_SERVICE, action.payload);
+        // Xóa thành công
+        yield USER_SAGA_GET();
+    } catch (error) {
+        console.log("error===>", error);
+    }
+}

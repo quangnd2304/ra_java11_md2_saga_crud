@@ -19,3 +19,15 @@ export const act_create_user = (newUser) => {
         payload: newUser
     }
 }
+export const act_update_user = (updateUser) => {
+    return {
+        type: actionTypes.USER_PATCH,
+        payload: updateUser
+    }
+}
+export const act_delete_user = (id) => {
+    return {
+        type: actionTypes.USER_DELETE,
+        payload: id
+    }
+}
